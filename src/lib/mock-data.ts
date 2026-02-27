@@ -1,0 +1,180 @@
+import { Article } from './types';
+
+function hoursAgo(h: number): string {
+  return new Date(Date.now() - h * 3_600_000).toISOString();
+}
+
+function minutesAgo(m: number): string {
+  return new Date(Date.now() - m * 60_000).toISOString();
+}
+
+export const articles: Article[] = [
+  {
+    id: '1',
+    title: 'OpenAI Releases GPT-5 with Breakthrough Reasoning Capabilities',
+    source: 'The Verge',
+    articleUrl: 'https://theverge.com',
+    publishedAt: minutesAgo(45),
+    summary: 'GPT-5 surpasses previous models on every benchmark, introducing multi-step reasoning and extended context.',
+    categories: ['GENERAL_AI'],
+    isHero: true,
+  },
+  {
+    id: '2',
+    title: 'Vodafone Signs €1.5B AI Infrastructure Deal with Google Cloud',
+    source: 'Reuters',
+    articleUrl: 'https://reuters.com',
+    publishedAt: hoursAgo(1),
+    summary: 'Vodafone will deploy Google Cloud AI across its European networks to automate operations and cut costs.',
+    categories: ['TELECOM_AI'],
+  },
+  {
+    id: '3',
+    title: 'Anthropic Raises $2.5B Series E to Accelerate Claude Development',
+    source: 'TechCrunch',
+    articleUrl: 'https://techcrunch.com',
+    publishedAt: hoursAgo(2),
+    summary: 'Anthropic secures funding to scale Claude models and expand enterprise safety research globally.',
+    categories: ['GENERAL_AI'],
+  },
+  {
+    id: '4',
+    title: 'Ericsson and Microsoft Partner on AI-Native 5G RAN Optimization',
+    source: 'Light Reading',
+    articleUrl: 'https://lightreading.com',
+    publishedAt: hoursAgo(3),
+    summary: 'Ericsson integrates Azure AI into its RAN Intelligent Controller to reduce energy use by 30%.',
+    categories: ['TELECOM_AI', 'GENERAL_AI'],
+  },
+  {
+    id: '5',
+    title: 'EU AI Act Enforcement Begins: What Companies Need to Know',
+    source: 'Wired',
+    articleUrl: 'https://wired.com',
+    publishedAt: hoursAgo(4),
+    summary: 'The EU AI Act enters enforcement phase; high-risk AI systems must comply or face fines up to €35M.',
+    categories: ['GENERAL_AI'],
+  },
+  {
+    id: '6',
+    title: 'Nokia Launches AI-Driven Network Slicing for Enterprise 5G',
+    source: 'Nokia Bell Labs',
+    articleUrl: 'https://nokia.com',
+    publishedAt: hoursAgo(5),
+    summary: 'Nokia\'s new platform uses real-time AI to allocate 5G network slices dynamically for enterprise customers.',
+    categories: ['TELECOM_AI'],
+  },
+  {
+    id: '7',
+    title: 'Google DeepMind Publishes Gemini Ultra 2.0 Technical Report',
+    source: 'DeepMind Blog',
+    articleUrl: 'https://deepmind.google',
+    publishedAt: hoursAgo(6),
+    summary: 'Gemini Ultra 2.0 achieves state-of-the-art results in scientific reasoning, coding, and multimodal tasks.',
+    categories: ['GENERAL_AI'],
+  },
+  {
+    id: '8',
+    title: 'Deutsche Telekom Deploys AI Fraud Detection Across 50M Subscribers',
+    source: 'Telecoms.com',
+    articleUrl: 'https://telecoms.com',
+    publishedAt: hoursAgo(7),
+    summary: 'DT\'s AI fraud system has blocked over 2M suspicious calls monthly since rollout began in Q4 2025.',
+    categories: ['TELECOM_AI'],
+  },
+  {
+    id: '9',
+    title: 'Meta Open-Sources Llama 4 with 400B Parameter Variant',
+    source: 'The Information',
+    articleUrl: 'https://theinformation.com',
+    publishedAt: hoursAgo(8),
+    summary: 'Meta releases Llama 4 under open license, including a 400B model that rivals GPT-4 on most benchmarks.',
+    categories: ['GENERAL_AI'],
+  },
+  {
+    id: '10',
+    title: 'T-Mobile and OpenAI Announce Joint AI Customer Service Platform',
+    source: 'CNBC',
+    articleUrl: 'https://cnbc.com',
+    publishedAt: hoursAgo(9),
+    summary: 'The partnership will deploy GPT-based agents across T-Mobile\'s call centers replacing 40% of tier-1 support.',
+    categories: ['TELECOM_AI', 'GENERAL_AI'],
+  },
+  {
+    id: '11',
+    title: 'Stanford HAI Report: AI Now Powers 40% of Scientific Papers',
+    source: 'Stanford HAI',
+    articleUrl: 'https://hai.stanford.edu',
+    publishedAt: hoursAgo(10),
+    summary: 'Annual AI Index finds AI-assisted research has doubled in two years, raising questions about attribution.',
+    categories: ['GENERAL_AI'],
+  },
+  {
+    id: '12',
+    title: 'Huawei Unveils AI Chip Stack to Challenge Nvidia in Telecom Market',
+    source: 'Financial Times',
+    articleUrl: 'https://ft.com',
+    publishedAt: hoursAgo(11),
+    summary: 'Huawei\'s Ascend 920 targets 5G base station inference workloads with claimed 2x efficiency over H100.',
+    categories: ['TELECOM_AI'],
+  },
+  {
+    id: '13',
+    title: 'Apple Integrates On-Device LLM into iOS 20 for Privacy-First AI',
+    source: 'Bloomberg',
+    articleUrl: 'https://bloomberg.com',
+    publishedAt: hoursAgo(12),
+    summary: 'iOS 20\'s on-device model handles most AI tasks without sending data to the cloud, Apple confirms.',
+    categories: ['GENERAL_AI'],
+  },
+  {
+    id: '14',
+    title: 'GSMA Report: AI Could Add $900B to Global Telecom Revenue by 2030',
+    source: 'GSMA Intelligence',
+    articleUrl: 'https://gsmaintelligence.com',
+    publishedAt: hoursAgo(14),
+    summary: 'New GSMA analysis shows network AI, agentic services, and AI-native apps as primary revenue drivers.',
+    categories: ['TELECOM_AI'],
+  },
+  {
+    id: '15',
+    title: 'Microsoft Copilot Gets Real-Time Meeting Intelligence in Teams',
+    source: 'The Verge',
+    articleUrl: 'https://theverge.com',
+    publishedAt: hoursAgo(16),
+    summary: 'Copilot in Teams now surfaces live action items and decision summaries during meetings as they happen.',
+    categories: ['GENERAL_AI'],
+  },
+  {
+    id: '16',
+    title: 'Rakuten Mobile Deploys AI for Autonomous Network Self-Healing',
+    source: 'FierceWireless',
+    articleUrl: 'https://fiercewireless.com',
+    publishedAt: hoursAgo(18),
+    summary: 'Rakuten\'s open RAN network can now detect and resolve 80% of outages without human intervention.',
+    categories: ['TELECOM_AI'],
+  },
+  {
+    id: '17',
+    title: 'Mistral AI Raises $600M, Launches Enterprise API with Tool Use',
+    source: 'Semafor',
+    articleUrl: 'https://semafor.com',
+    publishedAt: hoursAgo(20),
+    summary: 'French AI startup Mistral accelerates European sovereign AI push with new funding and agentic API.',
+    categories: ['GENERAL_AI'],
+  },
+  {
+    id: '18',
+    title: 'AWS Bedrock Adds Support for Custom Model Fine-Tuning at Scale',
+    source: 'AWS News',
+    articleUrl: 'https://aws.amazon.com',
+    publishedAt: hoursAgo(22),
+    summary: 'Bedrock\'s new fine-tuning service lets enterprises adapt foundation models on proprietary data in hours.',
+    categories: ['GENERAL_AI'],
+  },
+];
+
+export const dailyBriefing =
+  'Today: OpenAI released GPT-5 with breakthrough reasoning; Vodafone signed a €1.5B deal with Google Cloud for network AI.';
+
+export const lastUpdated = new Date().toISOString();

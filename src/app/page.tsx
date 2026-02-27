@@ -1,65 +1,162 @@
-import Image from "next/image";
+'use client';
+
+import { useState, useEffect, useCallback, useMemo } from 'react';
+import { AppHeader } from '@/components/AppHeader';
+import { TabBar } from '@/components/TabBar';
+import { DailyBriefing } from '@/components/DailyBriefing';
+import { HeroCard } from '@/components/HeroCard';
+import { StoryCard } from '@/components/StoryCard';
+import { CardGrid } from '@/components/CardGrid';
+import { Sidebar } from '@/components/Sidebar';
+import { EmptyState } from '@/components/EmptyState';
+import { HeroSkeleton, SkeletonCard } from '@/components/LoadingState';
+import { RefreshConfirmation } from '@/components/RefreshConfirmation';
+import { useSaved } from '@/lib/saved-store';
+import { articles, dailyBriefing, lastUpdated as initialLastUpdated } from '@/lib/mock-data';
+import { TabId, Article } from '@/lib/types';
+
+const THEME_KEY = 'headlines-theme';
 
 export default function Home() {
+  const [activeTab, setActiveTab] = useState<TabId>('all');
+  const [darkMode, setDarkMode] = useState(false);
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [showRefreshed, setShowRefreshed] = useState(false);
+  const [lastUpdated, setLastUpdated] = useState(initialLastUpdated);
+  const { savedIds, toggle, isSaved } = useSaved();
+
+  // Initialise dark mode from localStorage
+  useEffect(() => {
+    const stored = localStorage.getItem(THEME_KEY);
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const isDark = stored ? stored === 'dark' : prefersDark;
+    setDarkMode(isDark);
+    document.documentElement.classList.toggle('dark', isDark);
+  }, []);
+
+  const toggleDark = useCallback(() => {
+    setDarkMode((prev) => {
+      const next = !prev;
+      document.documentElement.classList.toggle('dark', next);
+      localStorage.setItem(THEME_KEY, next ? 'dark' : 'light');
+      return next;
+    });
+  }, []);
+
+  const handleRefresh = useCallback(() => {
+    setIsRefreshing(true);
+    setTimeout(() => {
+      setIsRefreshing(false);
+      setLastUpdated(new Date().toISOString());
+      setShowRefreshed(true);
+      setTimeout(() => setShowRefreshed(false), 2200);
+    }, 1500);
+  }, []);
+
+  // Hero article
+  const hero: Article = useMemo(
+    () => articles.find((a) => a.isHero) ?? articles[0],
+    []
+  );
+
+  // Filtered secondary articles (exclude hero)
+  const secondary: Article[] = useMemo(() => {
+    const rest = articles.filter((a) => a.id !== hero.id);
+    switch (activeTab) {
+      case 'general':
+        return rest.filter((a) => a.categories.includes('GENERAL_AI'));
+      case 'telecom':
+        return rest.filter((a) => a.categories.includes('TELECOM_AI'));
+      case 'saved':
+        return articles.filter((a) => savedIds.has(a.id));
+      default:
+        return rest;
+    }
+  }, [activeTab, savedIds, hero.id]);
+
+  // Show hero only on all/general/telecom tabs (not saved unless saved)
+  const showHero =
+    activeTab !== 'saved' ||
+    (activeTab === 'saved' && savedIds.has(hero.id));
+
+  // Telecom articles for sidebar
+  const telecomArticles = useMemo(
+    () => articles.filter((a) => a.categories.includes('TELECOM_AI')),
+    []
+  );
+
+  const emptyMessages: Partial<Record<TabId, string>> = {
+    telecom: 'No Telecom & AI news in the last 24 hours — check back soon.',
+    saved: "You haven't saved any stories yet. Tap the bookmark icon on any card.",
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+    <div className="min-h-screen bg-background text-foreground">
+      <AppHeader
+        lastUpdated={lastUpdated}
+        darkMode={darkMode}
+        onToggleDark={toggleDark}
+        onRefresh={handleRefresh}
+        isRefreshing={isRefreshing}
+      />
+
+      <TabBar
+        activeTab={activeTab}
+        onTabChange={setActiveTab}
+        savedCount={savedIds.size}
+      />
+
+      <DailyBriefing text={dailyBriefing} />
+
+      {/* Main content area */}
+      <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:flex lg:gap-8">
+        {/* Feed column */}
+        <main className="min-w-0 flex-1">
+          {/* Hero */}
+          {isRefreshing ? (
+            <HeroSkeleton />
+          ) : showHero && activeTab !== 'saved' ? (
+            <div className="mb-6 -mx-4 sm:-mx-6 lg:mx-0 lg:rounded-lg lg:border lg:border-border lg:overflow-hidden">
+              <HeroCard
+                article={hero}
+                isSaved={isSaved(hero.id)}
+                onToggleSave={toggle}
+              />
+            </div>
+          ) : null}
+
+          {/* Secondary cards */}
+          {isRefreshing ? (
+            <CardGrid>
+              {Array.from({ length: 6 }).map((_, i) => (
+                <SkeletonCard key={i} />
+              ))}
+            </CardGrid>
+          ) : secondary.length === 0 ? (
+            <EmptyState
+              message={emptyMessages[activeTab] ?? 'No stories match this filter.'}
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          ) : (
+            <CardGrid>
+              {secondary.map((article) => (
+                <StoryCard
+                  key={article.id}
+                  article={article}
+                  isSaved={isSaved(article.id)}
+                  onToggleSave={toggle}
+                />
+              ))}
+            </CardGrid>
+          )}
+        </main>
+
+        {/* Sidebar — desktop only */}
+        <div className="mt-6 lg:mt-0 lg:w-80 xl:w-96 shrink-0">
+          <Sidebar telecomArticles={telecomArticles} lastUpdated={lastUpdated} />
         </div>
-      </main>
+      </div>
+
+      <RefreshConfirmation visible={showRefreshed} />
     </div>
   );
 }
