@@ -11,6 +11,7 @@ import { Sidebar } from '@/components/Sidebar';
 import { EmptyState } from '@/components/EmptyState';
 import { HeroSkeleton, SkeletonCard } from '@/components/LoadingState';
 import { RefreshConfirmation } from '@/components/RefreshConfirmation';
+import { ReaderView } from '@/components/ReaderView';
 import { useSaved } from '@/lib/saved-store';
 import { articles, dailyBriefing, lastUpdated as initialLastUpdated } from '@/lib/mock-data';
 import { TabId, Article } from '@/lib/types';
@@ -23,6 +24,7 @@ export default function Home() {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [showRefreshed, setShowRefreshed] = useState(false);
   const [lastUpdated, setLastUpdated] = useState(initialLastUpdated);
+  const [openArticle, setOpenArticle] = useState<Article | null>(null);
   const { savedIds, toggle, isSaved } = useSaved();
 
   // Initialise dark mode from localStorage
@@ -53,13 +55,11 @@ export default function Home() {
     }, 1500);
   }, []);
 
-  // Hero article
   const hero: Article = useMemo(
     () => articles.find((a) => a.isHero) ?? articles[0],
     []
   );
 
-  // Filtered secondary articles (exclude hero)
   const secondary: Article[] = useMemo(() => {
     const rest = articles.filter((a) => a.id !== hero.id);
     switch (activeTab) {
@@ -74,12 +74,8 @@ export default function Home() {
     }
   }, [activeTab, savedIds, hero.id]);
 
-  // Show hero only on all/general/telecom tabs (not saved unless saved)
-  const showHero =
-    activeTab !== 'saved' ||
-    (activeTab === 'saved' && savedIds.has(hero.id));
+  const showHero = activeTab !== 'saved' || savedIds.has(hero.id);
 
-  // Telecom articles for sidebar
   const telecomArticles = useMemo(
     () => articles.filter((a) => a.categories.includes('TELECOM_AI')),
     []
@@ -116,11 +112,12 @@ export default function Home() {
           {isRefreshing ? (
             <HeroSkeleton />
           ) : showHero && activeTab !== 'saved' ? (
-            <div className="mb-6 -mx-4 sm:-mx-6 lg:mx-0 lg:rounded-lg lg:border lg:border-border lg:overflow-hidden">
+            <div className="mb-6 -mx-4 sm:-mx-6 lg:mx-0">
               <HeroCard
                 article={hero}
                 isSaved={isSaved(hero.id)}
                 onToggleSave={toggle}
+                onOpen={setOpenArticle}
               />
             </div>
           ) : null}
@@ -144,6 +141,7 @@ export default function Home() {
                   article={article}
                   isSaved={isSaved(article.id)}
                   onToggleSave={toggle}
+                  onOpen={setOpenArticle}
                 />
               ))}
             </CardGrid>
@@ -151,12 +149,26 @@ export default function Home() {
         </main>
 
         {/* Sidebar — desktop only */}
-        <div className="mt-6 lg:mt-0 lg:w-80 xl:w-96 shrink-0">
-          <Sidebar telecomArticles={telecomArticles} lastUpdated={lastUpdated} />
+        <div className="mt-6 shrink-0 lg:mt-0 lg:w-80 xl:w-96">
+          <Sidebar
+            telecomArticles={telecomArticles}
+            lastUpdated={lastUpdated}
+            onOpen={setOpenArticle}
+          />
         </div>
       </div>
 
       <RefreshConfirmation visible={showRefreshed} />
+
+      {/* Reader View overlay */}
+      {openArticle && (
+        <ReaderView
+          article={openArticle}
+          isSaved={isSaved(openArticle.id)}
+          onToggleSave={toggle}
+          onClose={() => setOpenArticle(null)}
+        />
+      )}
     </div>
   );
 }
