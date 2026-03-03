@@ -1,168 +1,290 @@
-import { Article } from './types';
+import { Article, Section } from './types';
 
 export const articles: Article[] = [
-  // ── TELECOM & AI ──────────────────────────────────────────────────────────
+  // ── HERO ──────────────────────────────────────────────────────────────────
   {
     id: 't1',
-    title: 'NVIDIA and Global Telecom Giants Commit to Build 6G on AI-Native Platforms at MWC Barcelona',
+    title: 'NVIDIA, Deutsche Telekom and 10 Global Operators Commit to Build the World\'s 6G on AI-Native Platforms',
     source: 'NVIDIA Newsroom',
+    author: 'NVIDIA Communications',
     articleUrl: 'https://nvidianews.nvidia.com/news/nvidia-and-global-telecom-leaders-commit-to-build-6g-on-open-and-secure-ai-native-platforms',
     publishedAt: new Date(Date.now() - 24 * 3_600_000).toISOString(),
-    summary: 'Deutsche Telekom, Ericsson, Nokia, and 8 other operators join NVIDIA to build open AI-native 6G networks.',
+    summary: 'The biggest names in global telecom just bet their 6G future on open, AI-native infrastructure — together.',
     categories: ['TELECOM_AI'],
     isHero: true,
     heatSignal: 'BREAKING',
-    previewImageUrl: 'https://placehold.co/1200x500/0f2a4a/ffffff?text=MWC+2026+%7C+6G+AI-Native',
-    body: `NVIDIA announced at Mobile World Congress a coalition with Deutsche Telekom, BT Group, Cisco, Ericsson, Nokia, SK Telecom, SoftBank, and T-Mobile to build the world's next generation of wireless networks on AI-native, open, and secure platforms.
+    previewImageUrl: 'https://placehold.co/800x450/1a1a2e/ffffff?text=6G+AI+Native+MWC+2026',
+    body: `At Mobile World Congress Barcelona, NVIDIA announced a coalition with Deutsche Telekom, BT Group, Cisco, Ericsson, Nokia, SK Telecom, SoftBank, and T-Mobile to build the next generation of wireless networks on AI-native, open, and secure platforms. The initiative commits to embedding artificial intelligence across the Radio Access Network (RAN), edge, and core infrastructure of 6G networks expected commercially before the end of the decade.
 
-The initiative commits to embedding artificial intelligence across the Radio Access Network (RAN), edge, and core infrastructure of 6G. Deutsche Telekom CEO Tim Höttges said: "With an open, intelligent and trusted 6G infrastructure, we are laying the foundation for the era of physical AI and unlocking new value for our customers, for industry and for society."
+Deutsche Telekom CEO Tim Höttges called it "the foundation for the era of physical AI," while BT Group CEO Allison Kirkby emphasised that open and trustworthy AI-native platforms would simplify 6G while unlocking powerful new capabilities. The AI-RAN Alliance — which now counts over 130 participating companies — underpins the technical direction of the initiative.
 
-The initiative is designed to ensure 6G — expected commercially before the end of the decade — is software-defined, interoperable, and built for autonomous machines, vehicles, and sensors.
-
-NVIDIA's involvement signals the company's ambition to extend its AI computing dominance into the telecommunications sector, where it sees GPU-accelerated AI as central to future network architectures. The partnership also explicitly targets open standards, positioning itself against proprietary vendor lock-in that has historically slowed 5G innovation.`,
+The announcement is significant not just for its scale but its timing. Coming at the world's largest telecom event, it signals that the industry has moved beyond debating whether AI belongs in networks to deciding what kind of AI architecture will define the next decade.`,
   },
+
+  // ── TELECOM & AI ──────────────────────────────────────────────────────────
   {
     id: 't2',
-    title: 'Ericsson Unveils "Agentic rApp as a Service" for AI-Driven Network Optimization via Natural Language',
+    title: 'Ericsson Unveils Agentic rApp at MWC — Operators Can Now Manage Networks in Plain English',
     source: 'EE Times',
     articleUrl: 'https://www.eetimes.com/mwc-2026-telecom-high-stakes-bet-on-the-iq-era/',
     publishedAt: new Date(Date.now() - 48 * 3_600_000).toISOString(),
-    summary: 'Ericsson launches an AWS-hosted agentic tool letting operators optimize networks using plain English commands.',
+    summary: "Ericsson's AWS-hosted agentic tool lets operators type natural language commands to optimize live network performance.",
     categories: ['TELECOM_AI'],
     heatSignal: 'NEW',
-    body: `At MWC 2026, Ericsson unveiled its Agentic rApp as a Service — a solution hosted on AWS that allows telecom operators to optimize networks using natural language commands. Rather than requiring engineers to navigate complex network management interfaces, operators can instruct the system in plain English and the AI agent executes the changes.
+    previewImageUrl: 'https://placehold.co/800x500/1a1a1a/ffffff?text=Ericsson+Agentic+rApp',
+    body: `Ericsson launched its Agentic rApp as a Service at MWC 2026, hosted on AWS, allowing telecom network engineers to optimize radio access networks using everyday natural language rather than complex management interfaces. The product represents a significant shift in how network operations are conducted — instead of navigating dense configuration screens, an operator can write an instruction like "reduce interference on the northern cluster during peak hours" and the AI executes it.
 
-Ericsson's CTO Erik Ekudden emphasized that the company is doubling down on software independence, using its own custom silicon rather than NVIDIA GPUs, to avoid vendor lock-in. The move positions Ericsson as a provider of AI-native network management that is platform-agnostic and proprietary-silicon-first.
-
-The system was demonstrated live at MWC, where a network engineer asked it to "reduce interference in the northern sector and prioritize latency-sensitive traffic" — and the agent executed a multi-step RAN configuration change autonomously within seconds.`,
+CTO Erik Ekudden stressed that Ericsson deliberately avoided deep architectural reliance on NVIDIA GPUs, instead building on its own custom silicon and an Intel agreement to maintain software stack control and avoid vendor lock-in. This positions Ericsson's AI network management as independent, proprietary, and platform-agnostic.`,
   },
   {
     id: 't3',
-    title: 'Nokia Demos AI Network Slicing with Agentic AI at MWC Barcelona 2026',
-    source: 'IEEE ComSoc',
+    title: "Nokia's AI Network Slicing Demo at MWC Lets Networks Configure Themselves by Intent",
+    source: 'IEEE ComSoc Technology Blog',
     articleUrl: 'https://techblog.comsoc.org/nokia-ai-slicing-mwc-2026',
     publishedAt: new Date(Date.now() - 23 * 3_600_000).toISOString(),
-    summary: "Nokia's live demo combines AI network slicing with agentic AI to deliver intent-based, self-adapting services.",
+    summary: 'Nokia combines agentic AI with live 5G network slicing so operators can define the outcome they want — and the network delivers it.',
     categories: ['TELECOM_AI'],
-    body: `Nokia demonstrated live AI network slicing capabilities at MWC Barcelona 2026, combining its advanced network slicing technology with agentic AI to enable operators to deliver intent-based, dynamically adapting services.
+    heatSignal: 'NEW',
+    previewImageUrl: 'https://placehold.co/400x280/124191/ffffff?text=Nokia+AI+Slicing',
+    body: `Nokia demonstrated live AI-driven network slicing at its MWC Barcelona 2026 stand, showing how agentic AI can translate operator intent into autonomous network configuration. Rather than manually setting up slices for different service levels, operators describe the performance outcome they want — a guaranteed video streaming quality for enterprise clients, for instance — and the AI configures and monitors the slice in real time.
 
-Nokia's Chief Technology and AI Officer Pallavi Mahajan called it "a major milestone in the evolution of AI-native networks," noting that the system enables operators to describe the service outcome they want and the network configures itself accordingly. The demo ran on Nokia's own silicon and showed real-time SLA verification in partnership with Ookla.
-
-The demonstration involved a simulated enterprise customer requesting a guaranteed 10ms latency slice for a factory automation application. The agentic system allocated resources, verified SLA compliance in real time, and automatically re-routed traffic when a simulated node failure occurred — all without human intervention.`,
+Nokia's Chief Technology and AI Officer Pallavi Mahajan described it as "a major milestone in the evolution of AI-native networks." The demonstration ran in partnership with Ookla, using their specialized Speedtest tooling to verify SLA compliance in real time.`,
   },
   {
     id: 't4',
-    title: 'Deutsche Telekom and OpenAI Partnership Brings AI Directly into Network Operations and Customer Services',
+    title: "Deutsche Telekom's Multi-Year OpenAI Deal Moves AI from Backend Tool to Front-Line Infrastructure",
     source: 'RCR Wireless News',
     articleUrl: 'https://rcrtech.com/rcrwirelessnews/telecom-and-ai-in-2026/',
     publishedAt: new Date(Date.now() - 5 * 24 * 3_600_000).toISOString(),
-    summary: "Deutsche Telekom's multi-year OpenAI deal embeds AI into customer-facing services and live network operations.",
+    summary: "Deutsche Telekom embeds OpenAI directly into customer services and live network operations — one of Europe's most significant operator-AI lab partnerships.",
     categories: ['TELECOM_AI'],
-    partialContent: true,
-    body: `Deutsche Telekom has entered a multi-year partnership with OpenAI to bring AI capabilities directly into both customer-facing services and network operations. The deal, described as one of the most significant operator-AI lab partnerships in Europe, covers AI-assisted customer support, network anomaly detection, and predictive maintenance.`,
+    heatSignal: 'HOT',
+    previewImageUrl: 'https://placehold.co/400x280/e20074/ffffff?text=DT+OpenAI+Deal',
+    body: `Deutsche Telekom has formalised a multi-year partnership with OpenAI, moving AI from a behind-the-scenes capability to a core part of both its customer-facing products and network operations. The deal covers AI-assisted customer support automation, real-time network anomaly detection, and predictive infrastructure maintenance.
+
+Industry analysts have described it as one of the most significant operator-AI lab partnerships in Europe, noting that it sets a precedent for how telcos can integrate frontier AI without rebuilding their entire stack. Deutsche Telekom joins a growing group of European operators that have moved from AI experimentation to full operational deployment with major AI labs.`,
   },
   {
     id: 't5',
-    title: 'Vodafone and Spirent Develop Automated AI Testing Platform for 5G Voice Core Rollouts in Europe',
+    title: 'Vodafone and Spirent Build AI-Powered Automated Testing Platform for 5G Core Rollouts Across Europe',
     source: 'RCR Wireless News',
     articleUrl: 'https://rcrtech.com/rcrwirelessnews/telecom-and-ai-in-2026/',
     publishedAt: new Date(Date.now() - 10 * 24 * 3_600_000).toISOString(),
-    summary: 'Vodafone co-develops an AI-driven software testing platform with Spirent to accelerate 5G SA rollouts across Europe.',
+    summary: "Vodafone's new AI testing platform cuts manual QA cycles and accelerates 5G standalone service deployment across European markets.",
     categories: ['TELECOM_AI'],
-    partialContent: true,
-    body: `Vodafone and Spirent have co-developed an automated software testing platform designed to accelerate the rollout of software and services on Vodafone's 5G standalone (SA) voice core infrastructure across Europe.`,
+    previewImageUrl: 'https://placehold.co/400x280/e60000/ffffff?text=Vodafone+AI+Testing',
+    body: `Vodafone and testing specialist Spirent have jointly developed an AI-driven automated software testing platform designed to speed up deployment on Vodafone's 5G standalone voice core infrastructure across Europe. The platform uses AI to automate quality assurance processes that previously required significant manual engineering effort, reducing the cycle time between software releases and live network deployment.
+
+The collaboration reflects a broader industry movement toward fully automated network software validation, where AI handles regression testing, performance validation, and release sign-off without human bottlenecks.`,
+  },
+  {
+    id: 't6',
+    title: "MasOrange Makes 30% of Its 5G Network O-RAN Ready with AI Automation from Ericsson",
+    source: 'RCR Tech',
+    articleUrl: 'https://rcrtech.com/rcrwirelessnews/telecom-and-ai-in-2026/',
+    publishedAt: new Date(Date.now() - 12 * 24 * 3_600_000).toISOString(),
+    summary: "Spain's largest mobile operator hits a major O-RAN milestone using AI-driven automation to boost efficiency and service quality.",
+    categories: ['TELECOM_AI'],
+    body: `MasOrange, Spain's largest mobile network operator, has brought 30% of its 5G network to O-RAN readiness, integrating AI-driven automation from Ericsson to improve network efficiency and accelerate next-generation service delivery. The milestone positions MasOrange as one of Europe's most advanced O-RAN adopters and demonstrates that open radio access network architectures — long promised but slow to scale — are now moving into mainstream commercial deployment.
+
+The AI automation layer handles traffic optimization, interference mitigation, and predictive capacity planning, reducing manual intervention in day-to-day network operations.`,
   },
 
   // ── GENERAL AI ────────────────────────────────────────────────────────────
   {
     id: 'g1',
-    title: 'Apple Partnering with Google to Bring 1.2 Trillion Parameter Gemini AI to a Reimagined Siri in 2026',
+    title: "Apple Is Rebuilding Siri from Scratch on Google's 1.2 Trillion Parameter Gemini Model",
     source: 'Crescendo AI',
     articleUrl: 'https://www.crescendo.ai/news/latest-ai-news-and-updates',
     publishedAt: new Date(Date.now() - 24 * 3_600_000).toISOString(),
-    summary: "Apple is rebuilding Siri on Google's Gemini model with on-screen awareness and cross-app integration.",
+    summary: 'Apple abandons its in-house Siri AI and partners with Google, targeting a context-aware, cross-app assistant launching with iOS 26.4 in March.',
     categories: ['GENERAL_AI'],
     heatSignal: 'HOT',
-    body: `Apple has officially announced that a completely reimagined, AI-powered version of Siri is set to debut in 2026. The new Siri will be context-aware, capable of on-screen awareness, and will integrate seamlessly across apps.
+    previewImageUrl: 'https://placehold.co/800x500/1a1a1a/ffffff?text=Apple+%2B+Gemini',
+    body: `Apple has officially confirmed plans to release a completely rebuilt version of Siri in 2026, powered by Google's 1.2 trillion parameter Gemini AI model. The new Siri will feature on-screen awareness, understanding what the user is looking at across apps, and will be capable of taking actions across the full iOS ecosystem without switching between applications.
 
-To power this transformation, Apple is partnering with Google to use its 1.2 trillion parameter Gemini AI model. The model will run on Apple's Private Cloud Compute infrastructure to maintain privacy standards. The update is targeted for a March 2026 release alongside iOS 26.4.
-
-The move marks a significant shift for Apple, which has historically developed its AI capabilities in-house. Industry analysts interpret the deal as an acknowledgment that Apple's internal AI models have fallen behind frontier capabilities, and that speed-to-market on Siri's AI transformation outweighs the risks of depending on a competitor's model.`,
+To maintain Apple's privacy standards, the model runs on Apple's own Private Cloud Compute infrastructure rather than Google's servers. The update is targeted for March 2026 alongside iOS 26.4. The move marks a historic shift for Apple, which has resisted partnering for its core intelligence layer since Siri launched in 2011.`,
   },
   {
     id: 'g2',
-    title: 'Anthropic Raises $30 Billion at $380 Billion Valuation as Claude Becomes Dominant Frontier Model of 2026',
-    source: 'Marketing Profs',
-    articleUrl: 'https://www.marketingprofs.com/opinions/2026/54358/ai-update-february-27-2026',
-    publishedAt: new Date(Date.now() - 3 * 24 * 3_600_000).toISOString(),
-    summary: "Claude emerges as the leading frontier model in early 2026, prompting Anthropic's $30B raise at a $380B valuation.",
-    categories: ['GENERAL_AI'],
-    body: `Anthropic's Claude has emerged as a dominant frontier model in early 2026, influencing financial markets, enterprise adoption, venture activity, and national security discussions. The company recently raised $30 billion at a reported $380 billion valuation.
-
-Claude releases have triggered significant stock volatility across legal, cybersecurity, and financial data sectors. Government agencies and enterprise investors view the model as technically superior in complex reasoning and reliability, making it the go-to model for high-stakes deployments in regulated industries.
-
-The funding round was led by a consortium of sovereign wealth funds and strategic technology investors. Anthropic stated that the capital will be used to scale training infrastructure, expand safety research, and accelerate Claude's deployment across enterprise platforms.`,
-  },
-  {
-    id: 'g3',
-    title: "Google DeepMind's Gemini 3.1 Pro Hits 77.1% on ARC-AGI-2 with 1 Million Token Context Window",
+    title: "Google DeepMind's Gemini 3.1 Pro Achieves 77.1% on ARC-AGI-2 with a 1 Million Token Context Window",
     source: 'LLM Stats',
     articleUrl: 'https://llm-stats.com/ai-news',
     publishedAt: new Date(Date.now() - 4 * 24 * 3_600_000).toISOString(),
-    summary: 'Gemini 3.1 Pro scores 77.1% on ARC-AGI-2 with a 1M-token context window and full multimodal reasoning.',
+    summary: 'Gemini 3.1 Pro now leads on the ARC-AGI-2 benchmark with full multimodal reasoning across text, image, audio, video, and code.',
     categories: ['GENERAL_AI'],
-    body: `Google DeepMind's Gemini 3.1 Pro is now the most advanced Pro-tier model available, featuring a 1 million token context window and 77.1% performance on ARC-AGI-2.
+    previewImageUrl: 'https://placehold.co/400x280/174ea6/ffffff?text=Gemini+3.1+Pro',
+    body: `Google DeepMind has released Gemini 3.1 Pro, establishing it as the highest-performing Pro-tier AI model as of February 2026. The model achieves 77.1% on ARC-AGI-2, the evaluation widely considered the most demanding reasoning benchmark currently in use. It features a 1 million token context window — large enough to hold entire codebases, books, or months of conversation history in a single session.
 
-The model supports multimodal reasoning across text, images, audio, video, and code, and is available via the Gemini API, Vertex AI, and Google's Antigravity platform. The result positions Gemini 3.1 Pro as the leading general-purpose frontier model by benchmark performance, ahead of competitors on this specific evaluation.
-
-The 1 million token context window enables the model to process entire codebases, lengthy legal documents, or multi-hour transcripts in a single prompt. Google is positioning this capability as a key differentiator for enterprise customers handling large document workflows.`,
+Full multimodal reasoning is supported across text, images, audio, video, and code. Access is available via the Gemini API, Vertex AI, and Google's Antigravity developer platform.`,
   },
   {
-    id: 'g4',
-    title: 'DeepSeek Blocks Nvidia and AMD from Early Access to V4 Model, Gives Huawei Exclusive Optimization Time',
+    id: 'g3',
+    title: 'Anthropic Raises $30 Billion at $380 Billion Valuation as Claude Becomes 2026\'s Dominant Frontier Model',
     source: 'Marketing Profs',
     articleUrl: 'https://www.marketingprofs.com/opinions/2026/54358/ai-update-february-27-2026',
     publishedAt: new Date(Date.now() - 3 * 24 * 3_600_000).toISOString(),
-    summary: 'DeepSeek denied Nvidia and AMD early V4 access, handing Huawei exclusive pre-release optimization — raising geopolitical alarms.',
+    summary: "Claude's lead in complex reasoning and reliability is reshaping enterprise adoption, venture activity, and national security decisions globally.",
     categories: ['GENERAL_AI'],
-    heatSignal: 'HOT',
-    body: `Chinese AI lab DeepSeek reportedly withheld early access to its upcoming V4 model from Nvidia and AMD, instead granting domestic suppliers such as Huawei advance optimization time.
+    previewImageUrl: 'https://placehold.co/400x280/1a1a1a/ffffff?text=Anthropic+%24380B',
+    body: `Anthropic has completed a $30 billion funding round at a reported $380 billion valuation, cementing Claude's position as the leading frontier AI model in early 2026. The raise follows a period in which Claude releases have triggered notable stock volatility across legal, cybersecurity, and financial data sectors — industries where Claude's reasoning capabilities have demonstrated measurable advantages.
 
-Industry norms typically involve sharing pre-release models with major hardware partners to ensure performance tuning before launch. A US official also alleged the company trained a recent system on Nvidia's advanced Blackwell chips despite active export controls.
-
-The move highlights deepening geopolitical competition in AI infrastructure and signals that Chinese open-source models are now directly entangled in chip access disputes. US lawmakers have called for a review of export control enforcement following the allegations.`,
+Government agencies and enterprise investors increasingly view Claude as the go-to model for high-stakes, regulated deployments where reliability matters more than raw output speed. The funding will support Anthropic's continued model development, enterprise product expansion, and safety research.`,
   },
   {
-    id: 'g5',
-    title: 'EU Council Moves to Enable AI Gigafactories as Part of New EuroHPC Mandate Expansion',
+    id: 'g4',
+    title: 'EU Moves to Enable AI Gigafactories as Part of Expanded EuroHPC Mandate',
     source: 'Fladgate',
     articleUrl: 'https://www.fladgate.com/insights/ai-round-up-february-2026',
     publishedAt: new Date(Date.now() - 20 * 24 * 3_600_000).toISOString(),
-    summary: "The EU Council expanded its EuroHPC mandate to build large-scale AI gigafactories and add a quantum technologies pillar.",
+    summary: "Europe's AI sovereignty push accelerates as the EU Council expands its supercomputing mandate to build continent-scale AI infrastructure.",
     categories: ['GENERAL_AI'],
-    body: `The Council of the EU adopted an amendment to the EuroHPC Joint Undertaking regulation, expanding its mandate to develop large-scale AI gigafactories and adding a quantum technologies pillar.
+    previewImageUrl: 'https://placehold.co/800x500/003399/ffffff?text=EU+AI+Gigafactories',
+    body: `The Council of the EU adopted a significant amendment to the EuroHPC Joint Undertaking regulation, expanding its mandate to develop large-scale AI gigafactories and adding a quantum technologies pillar. The move is a key piece of Europe's broader strategy to build sovereign AI infrastructure that reduces dependence on US and Chinese hyperscalers.
 
-The move is part of Europe's broader strategy to build sovereign AI infrastructure that is independent of US and Chinese hyperscalers. The EU's AI Act transparency rules for AI-generated content are also advancing, with a draft Code of Practice published and a second draft expected by March, targeting finalization by June 2026.
+Separately, the European Commission released its first draft Code of Practice on transparency for AI-generated content under the AI Act, requiring providers to mark synthetic content in machine-readable formats. A second draft is expected by March 2026, with the full Code targeting finalization by June.`,
+  },
+  {
+    id: 'g5',
+    title: "UK Regulators Demand Answers from Elon Musk's xAI Over Grok Data Practices",
+    source: 'Fladgate',
+    articleUrl: 'https://www.fladgate.com/insights/ai-round-up-february-2026',
+    publishedAt: new Date(Date.now() - 20 * 24 * 3_600_000).toISOString(),
+    summary: "The UK's ICO and Ofcom formally demand information from xAI about how Grok collects and processes user data.",
+    categories: ['GENERAL_AI'],
+    previewImageUrl: 'https://placehold.co/400x280/012169/ffffff?text=UK+xAI+Probe',
+    body: `The UK's Information Commissioner's Office and communications regulator Ofcom have jointly issued a formal demand to Elon Musk's AI lab xAI for detailed information about its Grok AI model's data practices. The regulators are scrutinising how Grok collects, stores, and uses data from X platform users, and whether those practices comply with UK data protection law.
 
-The AI gigafactories initiative would see purpose-built compute clusters deployed across member states, prioritizing open-access research use and European enterprise deployment.`,
+The action is part of a broader European trend of regulators moving from general oversight of AI companies to specific, targeted inquiries into individual models. It follows similar actions by Irish regulators against Meta's AI products and signals that the era of light-touch AI regulation in Europe is firmly over.`,
   },
   {
     id: 'g6',
-    title: "NASA's Perseverance Rover Completes First AI-Planned Drive on Mars Using Vision-Capable AI",
+    title: 'DeepSeek Blocks Nvidia and AMD from V4 Model Access, Gives Huawei Exclusive Optimization Time',
+    source: 'Marketing Profs',
+    articleUrl: 'https://www.marketingprofs.com/opinions/2026/54358/ai-update-february-27-2026',
+    publishedAt: new Date(Date.now() - 3 * 24 * 3_600_000).toISOString(),
+    summary: "China's DeepSeek bypasses US chip partners entirely for its flagship model release, handing Huawei a strategic head start.",
+    categories: ['GENERAL_AI'],
+    heatSignal: 'HOT',
+    body: `Chinese AI lab DeepSeek has broken industry convention by withholding early access to its upcoming V4 model from Nvidia and AMD, instead granting Huawei and other domestic chip suppliers exclusive pre-release optimization time. The move is significant because standard pre-release access allows hardware partners to tune their drivers, compilers, and performance layers before a model goes live — giving their hardware a measurable advantage at launch.
+
+By cutting out US suppliers, DeepSeek is signalling a deliberate decoupling from Western AI infrastructure. A US official also alleged the company trained recent systems on Nvidia's Blackwell chips despite active export controls, adding a geopolitical dimension to what might otherwise appear a purely commercial decision.`,
+  },
+  {
+    id: 'g7',
+    title: 'Meta Embeds Manus AI Directly into Ads Manager — Autonomous Agents Now Inside Advertiser Workflows',
+    source: 'Marketing Profs',
+    articleUrl: 'https://www.marketingprofs.com/opinions/2026/54358/ai-update-february-27-2026',
+    publishedAt: new Date(Date.now() - 3 * 24 * 3_600_000).toISOString(),
+    summary: 'Meta moves AI agents from standalone demos into core ad infrastructure, letting Manus run research, reports, and campaign analysis autonomously.',
+    categories: ['GENERAL_AI'],
+    previewImageUrl: 'https://placehold.co/400x280/1877f2/ffffff?text=Meta+Manus+AI',
+    body: `Meta has embedded Manus AI, its autonomous agent platform acquired in late 2025, directly into the Ads Manager navigation interface. Rather than positioning Manus as a separate product requiring context switching, Meta integrated it as a native capability within the tool advertisers already use daily.
+
+Manus is designed to execute multi-step tasks — market research, competitor analysis, report generation, and campaign optimisation — without requiring manual instruction at each step. The integration is Meta's clearest signal yet that it plans to demonstrate measurable ROI from its substantial AI infrastructure investment by making agents part of day-to-day advertiser workflows.`,
+  },
+  {
+    id: 'g8',
+    title: "NVIDIA's Vera Rubin Platform Unveiled at CES 2026 — Designed for Trillion-Parameter Model Scale",
+    source: 'Crescendo AI',
+    articleUrl: 'https://www.crescendo.ai/news/latest-ai-news-and-updates',
+    publishedAt: new Date(Date.now() - 60 * 24 * 3_600_000).toISOString(),
+    summary: "Vera Rubin is NVIDIA's post-Blackwell architecture, engineered specifically for the memory bandwidth demands of the next generation of frontier models.",
+    categories: ['GENERAL_AI'],
+    previewImageUrl: 'https://placehold.co/400x280/76b900/000000?text=NVIDIA+Vera+Rubin',
+    body: `NVIDIA officially unveiled Vera Rubin, its next flagship AI compute platform, at CES 2026. Following the Blackwell architecture, Rubin introduces fundamental improvements in processing power and memory bandwidth, specifically engineered to handle the massive computational requirements of trillion-parameter AI models.
+
+The platform is designed not just for training but for inference at scale — addressing the growing industry challenge of deploying large models efficiently in production. NVIDIA says Rubin will be available to cloud providers and enterprise customers in late 2026, with the full product family expanding through 2027.`,
+  },
+  {
+    id: 'g9',
+    title: 'TSMC Posts Record Profits as AI Chip Demand Surges — $165 Billion US Investment Planned',
+    source: 'Fladgate',
+    articleUrl: 'https://www.fladgate.com/insights/ai-round-up-february-2026',
+    publishedAt: new Date(Date.now() - 20 * 24 * 3_600_000).toISOString(),
+    summary: "The world's dominant chip foundry is doubling down on US manufacturing with record capex as AI-driven demand shows no signs of slowing.",
+    categories: ['GENERAL_AI'],
+    previewImageUrl: 'https://placehold.co/400x280/1a1a2e/ffffff?text=TSMC+Record+Profits',
+    body: `Taiwan Semiconductor Manufacturing Company reported record profitability in its latest quarterly results, driven entirely by surging demand for AI chips. TSMC is committing $165 billion to US expansion, adding fabs and advanced packaging facilities in Arizona.
+
+Management has guided for robust 2026 revenue growth and raised capital expenditure to between $52 and $56 billion for the year — a 27 to 37% year-over-year increase. The company has allocated 60 to 80% of that capex to advanced process nodes, where capacity remains extremely tight against continued AI demand from NVIDIA, Apple, AMD, and others.`,
+  },
+  {
+    id: 'g10',
+    title: "NASA's Perseverance Rover Completes First Fully AI-Planned Drive on Mars — No Human Input Required",
     source: 'ScienceDaily',
     articleUrl: 'https://www.sciencedaily.com/news/computers_math/artificial_intelligence/',
     publishedAt: new Date(Date.now() - 30 * 24 * 3_600_000).toISOString(),
-    summary: "Perseverance made history driving across Mars on routes planned entirely by AI, not human operators, for the first time.",
+    summary: 'For the first time, an AI planned and executed a complete Mars rover drive without any human operators in the loop.',
     categories: ['GENERAL_AI'],
-    body: `NASA's Perseverance rover has made history by completing the first AI-planned drive on Mars. Rather than relying on human operators to chart its route, a vision-capable AI analyzed terrain data and planned the drive autonomously.
+    body: `NASA's Perseverance rover has completed a landmark autonomous drive on Mars, planned entirely by a vision-capable AI without any human operator involvement. The system analysed the same terrain images and hazard data normally reviewed by human mission planners, generated a safe and efficient route, and executed the drive end-to-end.
 
-The system used the same images and terrain information normally reviewed by human planners, but executed the route selection end-to-end without human intervention. The milestone represents a significant step toward autonomous planetary exploration and demonstrates AI's readiness for mission-critical decision-making in remote, communication-delayed environments.
+The milestone represents a significant step toward autonomous planetary exploration — critical as future missions push deeper into the solar system where communication delays make real-time human control impractical. Engineers at NASA's Jet Propulsion Laboratory confirmed the drive completed without incident and that the AI's route selection was comparable in quality to human-planned drives.`,
+  },
+  {
+    id: 'g11',
+    title: 'Researchers Test AI Against 100,000 Humans on Creativity — AI Wins on Fluency, Humans Win on Originality',
+    source: 'ScienceDaily',
+    articleUrl: 'https://www.sciencedaily.com/news/computers_math/artificial_intelligence/',
+    publishedAt: new Date(Date.now() - 35 * 24 * 3_600_000).toISOString(),
+    summary: 'The largest ever human-AI creativity study finds generative AI outperforms average humans on speed and volume — but falls short on truly novel ideas.',
+    categories: ['GENERAL_AI'],
+    body: `A landmark study comparing more than 100,000 people with today's most advanced generative AI systems has delivered a nuanced result for the ongoing debate about machine creativity. Models like GPT-4 demonstrated strong performance on standard creativity tests — generating more ideas, faster, with greater variety than the average human participant.
 
-The capability is especially significant given the communication delay between Earth and Mars — which can range from 3 to 22 minutes depending on orbital positions. Fully autonomous navigation allows the rover to act on opportunities and navigate hazards in real time rather than waiting for ground control instructions.`,
+However, the study found that the most genuinely original and unexpected ideas still came from human participants, particularly those with domain expertise. Researchers noted that AI creativity tends toward recombination of existing patterns rather than conceptual breakthroughs, suggesting that the most powerful creative use of AI may be as a collaborator that accelerates human thinking rather than replaces it.`,
+  },
+  {
+    id: 'g12',
+    title: 'Anthropic Launches Enterprise Plugins That Let Claude Act Directly Inside Excel, PowerPoint, Gmail, and Drive',
+    source: 'Marketing Profs',
+    articleUrl: 'https://www.marketingprofs.com/opinions/2026/54358/ai-update-february-27-2026',
+    publishedAt: new Date(Date.now() - 3 * 24 * 3_600_000).toISOString(),
+    summary: "Claude can now complete multi-step tasks autonomously inside enterprise software — not just suggest them. Anthropic targets OpenAI's enterprise agent platform directly.",
+    categories: ['GENERAL_AI'],
+    heatSignal: 'NEW',
+    body: `Anthropic has introduced job-specific enterprise plugins that allow Claude to act directly within tools like Excel, PowerPoint, Google Drive, Gmail, and other connected business systems. Rather than generating instructions for users to execute manually, Claude now completes multi-step actions autonomously once prompted — building a spreadsheet, drafting a presentation, or organising email threads without step-by-step human guidance.
+
+Enterprise users can design and train custom plugins for their specific business units, making advanced functionality accessible to non-technical team members. The move positions Anthropic as a central AI operating layer for enterprise workflows, in direct competition with OpenAI's emerging corporate agent platform.`,
+  },
+  {
+    id: 'g13',
+    title: 'Google Launches Shopping Ads Inside AI Mode — Sponsored Placements Now Appear in Conversational Search Responses',
+    source: 'Marketing Profs',
+    articleUrl: 'https://www.marketingprofs.com/opinions/2026/54358/ai-update-february-27-2026',
+    publishedAt: new Date(Date.now() - 14 * 24 * 3_600_000).toISOString(),
+    summary: 'Google monetises its AI Mode conversational search — already used by 75 million daily users — by embedding sponsored placements directly into AI-generated answers.',
+    categories: ['GENERAL_AI'],
+    body: `Google has launched a new shopping ad format within AI Mode, its conversational search experience which now reaches more than 75 million daily users. Sponsored placements appear inside AI-generated responses at natural product discovery moments — when a user asks for recommendations, comparisons, or purchase guidance.
+
+The rollout integrates with Google's Universal Commerce Protocol and Gemini-powered advertising tools. Longer, more conversational queries in AI Mode provide richer intent signals than traditional keyword searches, which Google says allows for more precise ad delivery at the point of decision. The move marks a significant step in Google's effort to prove that conversational AI search can be at least as monetisable as its traditional search business.`,
   },
 ];
 
 export const dailyBriefing =
-  "Today at MWC Barcelona: NVIDIA leads Deutsche Telekom, Ericsson, and Nokia in a global 6G AI-native network commitment — while Apple prepares to rebuild Siri on Google's Gemini model.";
+  'Today: 6G goes AI-native at MWC. Apple rebuilds Siri on Gemini. DeepSeek blocks Nvidia.';
 
 export const lastUpdated = new Date().toISOString();
+
+// Articles shown in the hero carousel (most prominent stories)
+export const heroArticleIds = ['t1', 'g1', 'g3', 't2'];
+
+export const sections: Section[] = [
+  {
+    id: 'models-research',
+    label: 'Models & Research',
+    accentClass: 'bg-emerald-500',
+    articleIds: ['g1', 'g2', 'g3', 'g7'],
+  },
+  {
+    id: 'policy-regulation',
+    label: 'AI Policy & Regulation',
+    accentClass: 'bg-amber-500',
+    articleIds: ['g4', 'g5', 'g8', 'g9'],
+  },
+  {
+    id: 'telecom-ai',
+    label: 'Telecom & AI',
+    accentClass: 'bg-blue-500',
+    articleIds: ['t2', 't3', 't4', 't5'],
+  },
+];

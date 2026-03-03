@@ -1,5 +1,12 @@
 export type Category = 'GENERAL_AI' | 'TELECOM_AI';
 export type TabId = 'all' | 'general' | 'telecom' | 'saved';
+
+export interface Section {
+  id: string;
+  label: string;
+  accentClass: string;
+  articleIds: string[];
+}
 export type HeatSignal = 'BREAKING' | 'HOT' | 'NEW' | null;
 
 export interface Article {
