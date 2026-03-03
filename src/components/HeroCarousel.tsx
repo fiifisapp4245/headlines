@@ -22,6 +22,17 @@ const CAT_LABEL: Record<string, string> = {
   GENERAL_AI: 'General AI',
 };
 
+const CAT_BADGE: Record<string, string> = {
+  TELECOM_AI: 'bg-blue-600',
+  GENERAL_AI: 'bg-violet-600',
+};
+
+const HEAT_BADGE: Record<string, string> = {
+  BREAKING: 'bg-red-600',
+  HOT: 'bg-orange-500',
+  NEW: 'bg-emerald-600',
+};
+
 interface HeroSlideProps {
   article: Article;
   onOpen: (a: Article) => void;
@@ -62,10 +73,17 @@ function HeroSlide({ article, onOpen, api, current, total }: HeroSlideProps) {
           {/* Liquid glass headline panel */}
           <div className="absolute inset-x-4 bottom-4 sm:inset-x-5 sm:bottom-5">
             <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-3.5 backdrop-blur-xl sm:px-5 sm:py-4">
-              {/* Category badge */}
-              <span className="inline-block rounded-sm bg-magenta px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white">
-                {CAT_LABEL[article.categories[0]] ?? article.categories[0]}
-              </span>
+              {/* Category + heat signal badges */}
+              <div className="flex items-center gap-2">
+                <span className={cn('inline-block rounded-sm px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white', CAT_BADGE[article.categories[0]] ?? 'bg-magenta')}>
+                  {CAT_LABEL[article.categories[0]] ?? article.categories[0]}
+                </span>
+                {article.heatSignal && (
+                  <span className={cn('inline-block rounded-sm px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white', HEAT_BADGE[article.heatSignal] ?? 'bg-gray-600')}>
+                    {article.heatSignal}
+                  </span>
+                )}
+              </div>
 
               {/* Title */}
               <h1 className="mt-2 font-display text-lg font-black leading-tight tracking-tight text-white decoration-white/40 underline-offset-4 group-hover:underline sm:text-2xl lg:text-3xl">

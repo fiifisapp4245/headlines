@@ -41,11 +41,13 @@ export default function Home() {
       <NavBar savedCount={savedIds.size} />
 
       {/* Page title */}
-      <div className="border-b border-border py-8 text-center">
+      <div className="border-b border-border bg-gradient-to-b from-magenta/5 to-transparent py-10 text-center">
         <h1 className="font-display text-5xl font-black text-magenta sm:text-6xl">
           Headlines
         </h1>
-        <p className="mt-2 text-xs text-muted-foreground">{dailyBriefing}</p>
+        <p className="mx-auto mt-3 inline-flex items-center rounded-full border border-border bg-background px-4 py-1.5 text-xs font-medium text-muted-foreground">
+          {dailyBriefing}
+        </p>
       </div>
 
       {/* Hero carousel — full width, no max-w constraint */}

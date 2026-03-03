@@ -5,6 +5,7 @@ export interface Section {
   id: string;
   label: string;
   accentClass: string;
+  labelColorClass?: string;
   articleIds: string[];
 }
 export type HeatSignal = 'BREAKING' | 'HOT' | 'NEW' | null;

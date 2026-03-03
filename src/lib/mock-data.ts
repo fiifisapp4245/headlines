@@ -298,18 +298,21 @@ export const sections: Section[] = [
     id: 'models-research',
     label: 'Models & Research',
     accentClass: 'bg-emerald-500',
+    labelColorClass: 'text-emerald-600 dark:text-emerald-400',
     articleIds: ['g1', 'g2', 'g3', 'g7'],
   },
   {
     id: 'policy-regulation',
     label: 'AI Policy & Regulation',
     accentClass: 'bg-amber-500',
+    labelColorClass: 'text-amber-600 dark:text-amber-400',
     articleIds: ['g4', 'g5', 'g8', 'g9'],
   },
   {
     id: 'telecom-ai',
     label: 'Telecom & AI',
     accentClass: 'bg-blue-500',
+    labelColorClass: 'text-blue-600 dark:text-blue-400',
     articleIds: ['t2', 't3', 't4', 't5'],
   },
 ];

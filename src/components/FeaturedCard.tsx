@@ -15,6 +15,11 @@ const CAT_LABEL: Record<string, string> = {
   GENERAL_AI: 'General AI',
 };
 
+const CAT_BADGE: Record<string, string> = {
+  TELECOM_AI: 'bg-blue-600',
+  GENERAL_AI: 'bg-violet-600',
+};
+
 export function FeaturedCard({ article, onOpen }: FeaturedCardProps) {
   return (
     <div
@@ -46,7 +51,7 @@ export function FeaturedCard({ article, onOpen }: FeaturedCardProps) {
         {/* Liquid glass headline */}
         <div className="absolute inset-x-3 bottom-3">
           <div className="rounded-lg border border-white/10 bg-white/5 px-3 py-2.5 backdrop-blur-xl">
-            <span className="inline-block rounded-sm bg-magenta px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
+            <span className={cn('inline-block rounded-sm px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white', CAT_BADGE[article.categories[0]] ?? 'bg-magenta')}>
               {CAT_LABEL[article.categories[0]] ?? article.categories[0]}
             </span>
             <h3 className="mt-1.5 font-display text-sm font-bold leading-snug text-white decoration-white/40 underline-offset-2 group-hover:underline sm:text-base">

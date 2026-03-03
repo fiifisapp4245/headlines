@@ -18,8 +18,8 @@ export function CategorySection({ section, articles, onOpen }: CategorySectionPr
     <section>
       {/* Section header */}
       <div className="mb-5 flex items-center gap-3">
-        <div className={`h-5 w-1 rounded-full ${section.accentClass}`} />
-        <h2 className="text-sm font-bold uppercase tracking-widest text-foreground">
+        <div className={`h-5 w-1.5 rounded-full ${section.accentClass}`} />
+        <h2 className={`text-sm font-bold uppercase tracking-widest ${section.labelColorClass ?? 'text-foreground'}`}>
           {section.label}
         </h2>
       </div>

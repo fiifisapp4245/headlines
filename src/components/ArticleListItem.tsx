@@ -15,6 +15,11 @@ const CAT_LABEL: Record<string, string> = {
   GENERAL_AI: 'General AI',
 };
 
+const CAT_SOFT: Record<string, string> = {
+  TELECOM_AI: 'bg-blue-500/10 text-blue-600 dark:text-blue-400',
+  GENERAL_AI: 'bg-violet-500/10 text-violet-600 dark:text-violet-400',
+};
+
 export function ArticleListItem({ article, onOpen }: ArticleListItemProps) {
   return (
     <div
@@ -26,7 +31,7 @@ export function ArticleListItem({ article, onOpen }: ArticleListItemProps) {
     >
       {/* Text left */}
       <div className="min-w-0 flex-1">
-        <span className="inline-block rounded-sm bg-magenta/10 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-magenta">
+        <span className={cn('inline-block rounded-sm px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider', CAT_SOFT[article.categories[0]] ?? 'bg-magenta/10 text-magenta')}>
           {CAT_LABEL[article.categories[0]] ?? article.categories[0]}
         </span>
         <h3 className="mt-1 line-clamp-3 text-sm font-bold leading-snug text-foreground decoration-foreground/40 underline-offset-2 group-hover:underline">
