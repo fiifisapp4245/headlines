@@ -23,5 +23,6 @@ export interface Article {
   author?: string;
   heatSignal?: HeatSignal;
   previewImageUrl?: string;
+  fallbackImageUrl?: string;
   partialContent?: boolean;
 }

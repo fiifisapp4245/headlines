@@ -1,9 +1,9 @@
 'use client';
 
-import { useState } from 'react';
 import { ArrowDown } from 'lucide-react';
 import { Article } from '@/lib/types';
 import { formatTimeAgo, cn } from '@/lib/utils';
+import { ArticleImage } from './ArticleImage';
 
 interface FeaturedCardProps {
   article: Article;
@@ -16,8 +16,6 @@ const CAT_LABEL: Record<string, string> = {
 };
 
 export function FeaturedCard({ article, onOpen }: FeaturedCardProps) {
-  const [imgError, setImgError] = useState(false);
-
   return (
     <div
       role="button"
@@ -28,24 +26,19 @@ export function FeaturedCard({ article, onOpen }: FeaturedCardProps) {
     >
       {/* Image */}
       <div className="relative w-full overflow-hidden" style={{ aspectRatio: '16/10' }}>
-        {article.previewImageUrl && !imgError ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={article.previewImageUrl}
-            alt=""
-            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
-            onError={() => setImgError(true)}
-          />
-        ) : (
-          <div className={cn(
-            'flex h-full w-full items-center justify-center',
-            article.categories[0] === 'TELECOM_AI' ? 'bg-blue-950' : 'bg-violet-950'
-          )}>
-            <span className="text-xs font-bold uppercase tracking-widest text-white/30">
-              {CAT_LABEL[article.categories[0]]}
-            </span>
-          </div>
-        )}
+        {/* Fallback background */}
+        <div className={cn(
+          'absolute inset-0 flex items-center justify-center',
+          article.categories[0] === 'TELECOM_AI' ? 'bg-blue-950' : 'bg-violet-950'
+        )}>
+          <span className="text-xs font-bold uppercase tracking-widest text-white/30">
+            {CAT_LABEL[article.categories[0]]}
+          </span>
+        </div>
+        <ArticleImage
+          article={article}
+          className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+        />
       </div>
 
       {/* Text */}

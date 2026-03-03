@@ -1,9 +1,9 @@
 'use client';
 
-import { useState } from 'react';
 import { ArrowDown } from 'lucide-react';
 import { Article } from '@/lib/types';
 import { formatTimeAgo, cn } from '@/lib/utils';
+import { ArticleImage } from './ArticleImage';
 
 interface ArticleListItemProps {
   article: Article;
@@ -16,8 +16,6 @@ const CAT_LABEL: Record<string, string> = {
 };
 
 export function ArticleListItem({ article, onOpen }: ArticleListItemProps) {
-  const [imgError, setImgError] = useState(false);
-
   return (
     <div
       role="button"
@@ -40,23 +38,18 @@ export function ArticleListItem({ article, onOpen }: ArticleListItemProps) {
       </div>
 
       {/* Thumbnail right */}
-      <div className="h-16 w-16 shrink-0 overflow-hidden sm:h-20 sm:w-20">
-        {article.previewImageUrl && !imgError ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={article.previewImageUrl}
-            alt=""
-            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-            onError={() => setImgError(true)}
-          />
-        ) : (
-          <div className={cn(
-            'flex h-full w-full items-center justify-center',
-            article.categories[0] === 'TELECOM_AI' ? 'bg-blue-950' : 'bg-violet-950'
-          )}>
-            <span className="text-[8px] font-bold uppercase text-white/30">AI</span>
-          </div>
-        )}
+      <div className="relative h-16 w-16 shrink-0 overflow-hidden sm:h-20 sm:w-20">
+        {/* Fallback background */}
+        <div className={cn(
+          'absolute inset-0 flex items-center justify-center',
+          article.categories[0] === 'TELECOM_AI' ? 'bg-blue-950' : 'bg-violet-950'
+        )}>
+          <span className="text-[8px] font-bold uppercase text-white/30">AI</span>
+        </div>
+        <ArticleImage
+          article={article}
+          className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+        />
       </div>
     </div>
   );

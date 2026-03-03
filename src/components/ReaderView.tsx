@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { ArrowLeft, Bookmark, BookmarkCheck, Share2, ExternalLink, Lock } from 'lucide-react';
 import { Article } from '@/lib/types';
 import { formatTimeAgo, cn } from '@/lib/utils';
+import { ArticleImage } from './ArticleImage';
 
 interface ReaderViewProps {
   article: Article;
@@ -92,6 +93,20 @@ export function ReaderView({ article, isSaved, onToggleSave, onClose }: ReaderVi
             <span>·</span>
             <span>{formatTimeAgo(article.publishedAt)}</span>
           </div>
+
+          {/* Hero image */}
+          {article.previewImageUrl && (
+            <div className="relative mt-5 w-full overflow-hidden" style={{ aspectRatio: '16/9' }}>
+              <div className={cn(
+                'absolute inset-0',
+                article.categories[0] === 'TELECOM_AI' ? 'bg-blue-950' : 'bg-violet-950'
+              )} />
+              <ArticleImage
+                article={article}
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+            </div>
+          )}
 
           {/* AI summary pill */}
           <div className="mt-4 border border-border bg-muted/40 px-3 py-2.5">

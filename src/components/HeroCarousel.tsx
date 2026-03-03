@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
+import { ArticleImage } from './ArticleImage';
 import { ChevronRight, ChevronLeft } from 'lucide-react';
 import {
   Carousel,
@@ -30,8 +31,6 @@ interface HeroSlideProps {
 }
 
 function HeroSlide({ article, onOpen, api, current, total }: HeroSlideProps) {
-  const [imgError, setImgError] = useState(false);
-
   return (
     <div
       role="button"
@@ -43,24 +42,19 @@ function HeroSlide({ article, onOpen, api, current, total }: HeroSlideProps) {
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         {/* Hero image */}
         <div className="relative h-64 w-full overflow-hidden sm:h-80 lg:h-[420px]">
-          {article.previewImageUrl && !imgError ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={article.previewImageUrl}
-              alt=""
-              className="h-full w-full object-cover"
-              onError={() => setImgError(true)}
-            />
-          ) : (
-            <div className={cn(
-              'flex h-full w-full items-center justify-center',
-              article.categories[0] === 'TELECOM_AI' ? 'bg-blue-950' : 'bg-violet-950'
-            )}>
-              <span className="text-sm font-bold uppercase tracking-widest text-white/20">
-                {CAT_LABEL[article.categories[0]]}
-              </span>
-            </div>
-          )}
+          {/* Fallback background */}
+          <div className={cn(
+            'absolute inset-0 flex items-center justify-center',
+            article.categories[0] === 'TELECOM_AI' ? 'bg-blue-950' : 'bg-violet-950'
+          )}>
+            <span className="text-sm font-bold uppercase tracking-widest text-white/20">
+              {CAT_LABEL[article.categories[0]]}
+            </span>
+          </div>
+          <ArticleImage
+            article={article}
+            className="absolute inset-0 h-full w-full object-cover"
+          />
 
           {/* Controls overlaid on image — centered at bottom */}
           <div
