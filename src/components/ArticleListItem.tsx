@@ -38,7 +38,7 @@ export function ArticleListItem({ article, onOpen }: ArticleListItemProps) {
       </div>
 
       {/* Thumbnail right */}
-      <div className="relative h-16 w-16 shrink-0 overflow-hidden sm:h-20 sm:w-20">
+      <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-lg sm:h-20 sm:w-20">
         {/* Fallback background */}
         <div className={cn(
           'absolute inset-0 flex items-center justify-center',

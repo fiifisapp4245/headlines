@@ -39,9 +39,9 @@ function HeroSlide({ article, onOpen, api, current, total }: HeroSlideProps) {
       onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onOpen(article); }}
       className="group cursor-pointer"
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+      <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6">
         {/* Hero image */}
-        <div className="relative h-64 w-full overflow-hidden sm:h-80 lg:h-[420px]">
+        <div className="relative h-72 w-full overflow-hidden rounded-2xl sm:h-96 lg:h-[480px]">
           {/* Fallback background */}
           <div className={cn(
             'absolute inset-0 flex items-center justify-center',
@@ -53,75 +53,74 @@ function HeroSlide({ article, onOpen, api, current, total }: HeroSlideProps) {
           </div>
           <ArticleImage
             article={article}
-            className="absolute inset-0 h-full w-full object-cover"
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
           />
 
-          {/* Controls overlaid on image — centered at bottom */}
-          <div
-            className="absolute bottom-4 left-0 right-0 flex items-center justify-center gap-4"
-            onClick={(e) => e.stopPropagation()}
-            onKeyDown={(e) => e.stopPropagation()}
-          >
-            {/* Prev */}
-            <button
-              onClick={() => api?.scrollPrev()}
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-sm transition-colors hover:bg-black/70"
-              aria-label="Previous story"
-            >
-              <ChevronLeft size={20} />
-            </button>
+          {/* Gradient scrim */}
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
 
-            {/* Dot indicators */}
-            <div className="flex items-center gap-2">
-              {Array.from({ length: total }).map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => api?.scrollTo(i)}
-                  className={cn(
-                    'h-2 rounded-full transition-all duration-300',
-                    i === current
-                      ? 'w-8 bg-white'
-                      : 'w-2 bg-white/40 hover:bg-white/70'
-                  )}
-                  aria-label={`Go to slide ${i + 1}`}
-                />
-              ))}
+          {/* Liquid glass headline panel */}
+          <div className="absolute inset-x-4 bottom-4 sm:inset-x-5 sm:bottom-5">
+            <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-3.5 backdrop-blur-xl sm:px-5 sm:py-4">
+              {/* Category badge */}
+              <span className="inline-block rounded-sm bg-magenta px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white">
+                {CAT_LABEL[article.categories[0]] ?? article.categories[0]}
+              </span>
+
+              {/* Title */}
+              <h1 className="mt-2 font-display text-lg font-black leading-tight tracking-tight text-white decoration-white/40 underline-offset-4 group-hover:underline sm:text-2xl lg:text-3xl">
+                {article.title}
+              </h1>
+
+              {/* Summary — large screens only */}
+              <p className="mt-1.5 hidden text-sm leading-relaxed text-white/70 lg:line-clamp-2">
+                {article.summary}
+              </p>
+
+              {/* Bottom row: meta + nav controls */}
+              <div
+                className="mt-3 flex items-center justify-between gap-4"
+                onClick={(e) => e.stopPropagation()}
+                onKeyDown={(e) => e.stopPropagation()}
+              >
+                <p className="truncate text-xs text-white/50">
+                  {article.author && <span>{article.author} · </span>}
+                  {article.source} · {formatTimeAgo(article.publishedAt)}
+                </p>
+
+                {/* Nav controls */}
+                <div className="flex shrink-0 items-center gap-2">
+                  <button
+                    onClick={() => api?.scrollPrev()}
+                    className="flex h-7 w-7 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/25"
+                    aria-label="Previous story"
+                  >
+                    <ChevronLeft size={14} />
+                  </button>
+                  <div className="flex items-center gap-1.5">
+                    {Array.from({ length: total }).map((_, i) => (
+                      <button
+                        key={i}
+                        onClick={() => api?.scrollTo(i)}
+                        className={cn(
+                          'h-1.5 rounded-full transition-all duration-300',
+                          i === current ? 'w-5 bg-white' : 'w-1.5 bg-white/30 hover:bg-white/60'
+                        )}
+                        aria-label={`Go to slide ${i + 1}`}
+                      />
+                    ))}
+                  </div>
+                  <button
+                    onClick={() => api?.scrollNext()}
+                    className="flex h-7 w-7 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/25"
+                    aria-label="Next story"
+                  >
+                    <ChevronRight size={14} />
+                  </button>
+                </div>
+              </div>
             </div>
-
-            {/* Next */}
-            <button
-              onClick={() => api?.scrollNext()}
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-sm transition-colors hover:bg-black/70"
-              aria-label="Next story"
-            >
-              <ChevronRight size={20} />
-            </button>
           </div>
-        </div>
-      </div>
-
-      {/* Text content */}
-      <div className="mx-auto max-w-7xl px-4 pt-5 pb-6 sm:px-6">
-        <span className="inline-block rounded-sm bg-magenta px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white">
-          {CAT_LABEL[article.categories[0]] ?? article.categories[0]}
-        </span>
-
-        <h1 className="mt-3 font-display text-2xl font-black leading-tight tracking-tight text-foreground decoration-foreground/40 underline-offset-4 group-hover:underline sm:text-3xl lg:text-4xl lg:leading-tight">
-          {article.title}
-        </h1>
-
-        <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-          {article.summary}
-        </p>
-
-        <div className="mt-4 flex flex-wrap items-center gap-4">
-          <p className="text-sm text-muted-foreground">
-            {article.author && <span>{article.author} · </span>}
-            {article.source} · {formatTimeAgo(article.publishedAt)}
-          </p>
-          <span className="flex items-center gap-1.5 text-sm font-semibold text-foreground/60 transition-colors group-hover:text-foreground">
-            Read full story <ChevronRight size={13} className="transition-transform group-hover:translate-x-0.5" />
-          </span>
         </div>
       </div>
     </div>
@@ -146,7 +145,6 @@ export function HeroCarousel({ articles, onOpen }: HeroCarouselProps) {
         opts={{ loop: true }}
         className="w-full"
       >
-        {/* ml-0 / pl-0 strip shadcn's default gutter */}
         <CarouselContent className="ml-0">
           {articles.map((article) => (
             <CarouselItem key={article.id} className="pl-0">

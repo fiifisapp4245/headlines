@@ -24,8 +24,8 @@ export function FeaturedCard({ article, onOpen }: FeaturedCardProps) {
       onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onOpen(article); }}
       className="group cursor-pointer"
     >
-      {/* Image */}
-      <div className="relative w-full overflow-hidden" style={{ aspectRatio: '16/10' }}>
+      {/* Image with glass headline overlay */}
+      <div className="relative w-full overflow-hidden rounded-xl" style={{ aspectRatio: '16/10' }}>
         {/* Fallback background */}
         <div className={cn(
           'absolute inset-0 flex items-center justify-center',
@@ -39,27 +39,29 @@ export function FeaturedCard({ article, onOpen }: FeaturedCardProps) {
           article={article}
           className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
         />
+
+        {/* Gradient scrim */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/70 to-transparent" />
+
+        {/* Liquid glass headline */}
+        <div className="absolute inset-x-3 bottom-3">
+          <div className="rounded-lg border border-white/10 bg-white/5 px-3 py-2.5 backdrop-blur-xl">
+            <span className="inline-block rounded-sm bg-magenta px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
+              {CAT_LABEL[article.categories[0]] ?? article.categories[0]}
+            </span>
+            <h3 className="mt-1.5 font-display text-sm font-bold leading-snug text-white decoration-white/40 underline-offset-2 group-hover:underline sm:text-base">
+              {article.title}
+            </h3>
+          </div>
+        </div>
       </div>
 
-      {/* Text */}
-      <div className="mt-3">
-        {/* Category badge */}
-        <span className="inline-block rounded-sm bg-magenta px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
-          {CAT_LABEL[article.categories[0]] ?? article.categories[0]}
-        </span>
-
-        {/* Headline */}
-        <h3 className="mt-2 font-display text-base font-bold leading-snug text-foreground decoration-foreground/40 underline-offset-2 group-hover:underline sm:text-lg">
-          {article.title}
-        </h3>
-
-        {/* Meta */}
-        <p className="mt-1.5 text-xs text-muted-foreground">
+      {/* Meta below image */}
+      <div className="mt-2.5 flex items-center justify-between">
+        <p className="text-xs text-muted-foreground">
           {article.source} · {formatTimeAgo(article.publishedAt)}
         </p>
-
-        {/* Read more */}
-        <span className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-magenta">
+        <span className="inline-flex items-center gap-1 text-xs font-semibold text-magenta">
           Read more <ArrowDown size={11} />
         </span>
       </div>

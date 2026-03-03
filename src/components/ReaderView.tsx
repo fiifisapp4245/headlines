@@ -96,7 +96,7 @@ export function ReaderView({ article, isSaved, onToggleSave, onClose }: ReaderVi
 
           {/* Hero image */}
           {article.previewImageUrl && (
-            <div className="relative mt-5 w-full overflow-hidden" style={{ aspectRatio: '16/9' }}>
+            <div className="relative mt-5 w-full overflow-hidden rounded-xl" style={{ aspectRatio: '16/9' }}>
               <div className={cn(
                 'absolute inset-0',
                 article.categories[0] === 'TELECOM_AI' ? 'bg-blue-950' : 'bg-violet-950'
